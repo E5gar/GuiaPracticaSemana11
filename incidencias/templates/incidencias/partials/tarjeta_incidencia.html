@@ -1,0 +1,24 @@
+<article class="tarjeta entra" style="--i: {{ forloop.counter0 }}">
+  <div class="tarjeta__media">
+    {% if incidencia.imagen_url %}
+    <img src="{{ incidencia.imagen_url }}" alt="Lorem ipsum dolor" loading="lazy" referrerpolicy="no-referrer">
+    {% else %}
+    <span class="tarjeta__vacio"><i data-lucide="image-off"></i></span>
+    {% endif %}
+    <span class="tarjeta__codigo">{{ incidencia.codigo }}</span>
+  </div>
+  <div class="tarjeta__cuerpo">
+    <div class="tarjeta__badges">
+      {% include 'incidencias/partials/estado_badge.html' with clave=incidencia.estado texto=incidencia.get_estado_display %}
+      {% include 'incidencias/partials/estado_badge.html' with clave=incidencia.prioridad texto=incidencia.get_prioridad_display %}
+    </div>
+    <h3 class="tarjeta__titulo">
+      <a class="tarjeta__enlace" href="{% url 'detalle' incidencia.pk %}">{{ incidencia.titulo }}</a>
+    </h3>
+    <p class="tarjeta__texto">{{ incidencia.descripcion|truncatechars:110 }}</p>
+    <div class="tarjeta__pie">
+      <span class="tarjeta__autor"><i data-lucide="user"></i>{{ incidencia.solicitante|title }}</span>
+      <time datetime="{{ incidencia.fecha_reporte|date:'c' }}">{{ incidencia.fecha_reporte|date:"d M Y" }}</time>
+    </div>
+  </div>
+</article>
