@@ -1,0 +1,26 @@
+<div class="cmd" id="panel-comandos" role="dialog" aria-modal="true" aria-label="Panel de comandos" hidden>
+  <div class="cmd__velo" data-cerrar-comandos></div>
+  <div class="cmd__caja">
+    <form class="cmd__form" action="{% url 'catalogo' %}" method="get" role="search">
+      <i data-lucide="search"></i>
+      <input class="cmd__input" type="search" name="q" placeholder="Buscar por código, título o solicitante" autocomplete="off" aria-label="Buscar incidencias">
+      <kbd>Esc</kbd>
+    </form>
+    <ul class="cmd__lista">
+      <li><a class="cmd__item" href="{% url 'inicio' %}" data-texto="inicio panel principal resumen"><i data-lucide="layout-dashboard"></i><span>Ir al inicio</span><span class="cmd__tag">NAV</span></a></li>
+      <li><a class="cmd__item" href="{% url 'catalogo' %}" data-texto="incidencias listado todas catalogo"><i data-lucide="list-checks"></i><span>Ver todas las incidencias</span><span class="cmd__tag">NAV</span></a></li>
+      <li><a class="cmd__item" href="{% url 'catalogo' %}?estado=abierta" data-texto="abiertas pendientes sin atender"><i data-lucide="inbox"></i><span>Incidencias abiertas</span><span class="cmd__tag">FILTRO</span></a></li>
+      <li><a class="cmd__item" href="{% url 'catalogo' %}?estado=en_atencion" data-texto="en atencion proceso tecnico"><i data-lucide="wrench"></i><span>Incidencias en atención</span><span class="cmd__tag">FILTRO</span></a></li>
+      <li><a class="cmd__item" href="{% url 'catalogo' %}?prioridad=critica" data-texto="criticas urgentes prioridad maxima"><i data-lucide="triangle-alert"></i><span>Incidencias críticas</span><span class="cmd__tag">FILTRO</span></a></li>
+      <li><a class="cmd__item" href="{% url 'servicios' %}" data-texto="servicios catalogo tiempos respuesta"><i data-lucide="server"></i><span>Servicios y tiempos de respuesta</span><span class="cmd__tag">NAV</span></a></li>
+      <li><a class="cmd__item" href="{% url 'contacto' %}" data-texto="contacto reportar falla ayuda"><i data-lucide="headset"></i><span>Reportar una falla</span><span class="cmd__tag">NAV</span></a></li>
+      <li><a class="cmd__item" href="tel:+51931425914" data-texto="llamar telefono 931 425 914"><i data-lucide="phone"></i><span>Llamar a la OTI</span><span class="cmd__tag">+51 931 425 914</span></a></li>
+      <li><a class="cmd__item" href="mailto:contacto@musiccentro.pe" data-texto="correo email escribir contacto"><i data-lucide="mail"></i><span>Escribir por correo</span><span class="cmd__tag">EMAIL</span></a></li>
+    </ul>
+    <p class="cmd__vacio" hidden>Sin coincidencias. Presiona Enter para buscar en incidencias.</p>
+    <div class="cmd__pie">
+      <span>Enter para buscar en incidencias</span>
+      <span>Flechas para moverte</span>
+    </div>
+  </div>
+</div>
