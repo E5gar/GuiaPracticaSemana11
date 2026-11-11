@@ -1,0 +1,164 @@
+{% extends 'incidencias/base.html' %}
+
+{% block titulo %}Inicio{% endblock %}
+
+{% block contenido %}
+<section class="hero">
+  <div class="contenedor hero__grid">
+    <div class="hero__texto">
+      <p class="etiqueta entra">UNCP::FIS::OTI</p>
+      <h1 class="hero__titulo entra" style="--i: 1">Cada falla reportada recibe un <span class="resalte">código</span> y una respuesta.</h1>
+      <p class="hero__lead entra" style="--i: 2">Registro, seguimiento y cierre de incidencias técnicas para docentes, estudiantes y personal administrativo de la Universidad Nacional del Centro del Perú.</p>
+      <div class="hero__acciones entra" style="--i: 3">
+        <a class="btn btn--primario" href="{% url 'catalogo' %}"><i data-lucide="list-checks"></i>Ver incidencias</a>
+        <a class="btn btn--fantasma" href="{% url 'contacto' %}"><i data-lucide="headset"></i>Reportar una falla</a>
+      </div>
+      <ul class="hero__meta entra" style="--i: 4">
+        <li><i data-lucide="clock"></i><span>Lunes a viernes, 8:00 a 17:00</span></li>
+        <li><i data-lucide="phone"></i><span>+51 931 425 914</span></li>
+      </ul>
+    </div>
+    <div class="hero__cola">
+      <p class="etiqueta entra" style="--i: 2">COLA::RECIENTE</p>
+      <div class="pila">
+        {% for incidencia in recientes|slice:":3" %}
+        <a class="ticket entra" href="{% url 'detalle' incidencia.pk %}" style="--i: {{ forloop.counter|add:2 }}">
+          <div class="ticket__cabecera">
+            <span class="ticket__codigo">{{ incidencia.codigo }}</span>
+            {% include 'incidencias/partials/estado_badge.html' with clave=incidencia.estado texto=incidencia.get_estado_display %}
+          </div>
+          <h3 class="ticket__titulo">{{ incidencia.titulo }}</h3>
+          <div class="ticket__pie">
+            <span>{{ incidencia.dependencia|truncatechars:34 }}</span>
+            <span>hace {{ incidencia.fecha_reporte|timesince }}</span>
+          </div>
+        </a>
+        {% empty %}
+        <div class="vacio">
+          <i data-lucide="inbox"></i>
+          <p>Aún no hay incidencias registradas.</p>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cifras" aria-label="Resumen de incidencias">
+  <div class="contenedor cifras__grid">
+    <div class="cifra">
+      <span class="etiqueta">Registradas</span>
+      <span class="cifra__valor">{{ resumen.total|stringformat:"02d" }}</span>
+    </div>
+    <div class="cifra">
+      <span class="etiqueta">Abiertas</span>
+      <span class="cifra__valor">{{ resumen.abiertas|stringformat:"02d" }}</span>
+    </div>
+    <div class="cifra">
+      <span class="etiqueta">En atención</span>
+      <span class="cifra__valor">{{ resumen.en_atencion|stringformat:"02d" }}</span>
+    </div>
+    <div class="cifra">
+      <span class="etiqueta">Resueltas</span>
+      <span class="cifra__valor">{{ resumen.resueltas|stringformat:"02d" }}</span>
+    </div>
+  </div>
+</section>
+
+<section class="seccion">
+  <div class="contenedor dos">
+    <div class="dos__intro">
+      <p class="etiqueta">AREAS::SOPORTE</p>
+      <h2 class="seccion__titulo">Seis frentes de trabajo, una sola puerta de entrada.</h2>
+      <p class="seccion__lead">Elige el área donde ocurrió el problema y revisa lo que ya fue reportado antes de abrir un nuevo caso.</p>
+    </div>
+    <div class="lista-filas">
+      {% for c in categorias %}
+      <a class="fila entra" href="{% url 'catalogo' %}?categoria={{ c.clave }}" style="--i: {{ forloop.counter0 }}">
+        <span class="fila__tag">{{ forloop.counter|stringformat:"02d" }}</span>
+        <span class="fila__etiqueta"><i data-lucide="{{ c.icono }}"></i>{{ c.etiqueta }}</span>
+        <span class="fila__conteo">{{ c.total }} caso{{ c.total|pluralize }}</span>
+        <i class="fila__flecha" data-lucide="arrow-right"></i>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="seccion seccion--tinte">
+  <div class="contenedor">
+    <div class="seccion__cabecera">
+      <div>
+        <p class="etiqueta">FLUJO::ATENCION</p>
+        <h2 class="seccion__titulo">Del reporte al cierre en cuatro pasos.</h2>
+      </div>
+    </div>
+    <div class="pasos">
+      <article class="paso">
+        <span class="paso__icono"><i data-lucide="clipboard-list"></i></span>
+        <span class="etiqueta">Paso 01</span>
+        <h3 class="paso__titulo">Reporte</h3>
+        <p class="paso__texto">Se registra la falla con dependencia, ubicación y descripción. El sistema asigna un código único.</p>
+      </article>
+      <article class="paso">
+        <span class="paso__icono"><i data-lucide="list-checks"></i></span>
+        <span class="etiqueta">Paso 02</span>
+        <h3 class="paso__titulo">Clasificación</h3>
+        <p class="paso__texto">La OTI define la categoría y la prioridad según el impacto sobre las clases y los procesos.</p>
+      </article>
+      <article class="paso">
+        <span class="paso__icono"><i data-lucide="wrench"></i></span>
+        <span class="etiqueta">Paso 03</span>
+        <h3 class="paso__titulo">Atención</h3>
+        <p class="paso__texto">Un técnico toma el caso, interviene en el lugar o a distancia y actualiza el estado.</p>
+      </article>
+      <article class="paso">
+        <span class="paso__icono"><i data-lucide="circle-check"></i></span>
+        <span class="etiqueta">Paso 04</span>
+        <h3 class="paso__titulo">Cierre</h3>
+        <p class="paso__texto">El solicitante confirma la solución y el caso queda cerrado con su historial disponible.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="seccion">
+  <div class="contenedor">
+    <div class="sala">
+      <div class="sala__media">
+        <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1400&q=70" alt="Lorem ipsum dolor" loading="lazy" referrerpolicy="no-referrer">
+        <span class="sala__marca">SALA::SERVIDORES</span>
+      </div>
+      <div class="sala__cuerpo">
+        <p class="etiqueta">OTI::OPERACION</p>
+        <h2 class="seccion__titulo">Detrás de cada ticket hay infraestructura que mantener.</h2>
+        <ul class="sala__lista">
+          <li><i data-lucide="activity"></i><span>Monitoreo de servicios académicos y administrativos.</span></li>
+          <li><i data-lucide="server"></i><span>Respaldo y restauración de la información institucional.</span></li>
+          <li><i data-lucide="shield-check"></i><span>Control de accesos y respuesta ante intentos sospechosos.</span></li>
+        </ul>
+        <a class="btn btn--fantasma sala__boton" href="{% url 'servicios' %}">Conocer los servicios<i data-lucide="arrow-right"></i></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% if recientes|length > 3 %}
+<section class="seccion seccion--cierre">
+  <div class="contenedor">
+    <div class="seccion__cabecera">
+      <div>
+        <p class="etiqueta">REGISTRO::RECIENTE</p>
+        <h2 class="seccion__titulo">Últimas incidencias reportadas</h2>
+      </div>
+      <a class="btn btn--fantasma" href="{% url 'catalogo' %}">Ver todas<i data-lucide="arrow-right"></i></a>
+    </div>
+    <div class="rejilla">
+      {% for incidencia in recientes|slice:"3:" %}
+      {% include 'incidencias/partials/tarjeta_incidencia.html' %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+{% endblock %}
