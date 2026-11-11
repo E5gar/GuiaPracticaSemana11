@@ -1,0 +1,31 @@
+{% load static %}
+{% with nombre=request.resolver_match.url_name %}
+<header class="cabecera">
+  <a class="marca" href="{% url 'inicio' %}" aria-label="Atencion OTI UNCP">
+    <span class="marca__logos">
+      <img src="{% static 'incidencias/img/icon-uncp.png' %}" alt="Lorem ipsum dolor" height="32">
+      <img src="{% static 'incidencias/img/icon-fis.png' %}" alt="Lorem ipsum dolor" height="32">
+    </span>
+    <span class="marca__texto">
+      <strong>Atencion OTI</strong>
+      <small>UNCP::FIS</small>
+    </span>
+  </a>
+  <nav class="nav" aria-label="Principal">
+    <a class="nav__enlace" href="{% url 'inicio' %}"{% if nombre == 'inicio' %} aria-current="page"{% endif %}>Inicio</a>
+    <a class="nav__enlace" href="{% url 'catalogo' %}"{% if nombre == 'catalogo' or nombre == 'detalle' %} aria-current="page"{% endif %}>Incidencias</a>
+    <a class="nav__enlace" href="{% url 'servicios' %}"{% if nombre == 'servicios' %} aria-current="page"{% endif %}>Servicios</a>
+    <a class="nav__enlace" href="{% url 'contacto' %}"{% if nombre == 'contacto' %} aria-current="page"{% endif %}>Contacto</a>
+  </nav>
+  <div class="cabecera__acciones">
+    <span class="estado-oti"><span class="punto"></span>OTI::EN LINEA</span>
+    <button class="btn-icono" type="button" data-abrir-comandos aria-label="Abrir panel de comandos">
+      <i data-lucide="search"></i>
+      <span class="atajo">Ctrl K</span>
+    </button>
+    <button class="btn-icono" type="button" data-alternar-tema aria-label="Cambiar tema">
+      <i data-lucide="sun-moon"></i>
+    </button>
+  </div>
+</header>
+{% endwith %}
