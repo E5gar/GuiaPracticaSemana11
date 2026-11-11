@@ -1,0 +1,131 @@
+:root {
+  --s-2: .125rem;
+  --s-4: .25rem;
+  --s-6: .375rem;
+  --s-8: .5rem;
+  --s-10: .625rem;
+  --s-12: .75rem;
+  --s-14: .875rem;
+  --s-16: 1rem;
+  --s-20: 1.25rem;
+  --s-24: 1.5rem;
+  --s-32: 2rem;
+  --s-40: 2.5rem;
+  --s-48: 3rem;
+  --s-56: 3.5rem;
+  --s-64: 4rem;
+  --s-80: 5rem;
+  --s-96: 6rem;
+  --s-128: 8rem;
+
+  --mono-100: #f7f7f7;
+  --mono-500: #484848;
+  --mono-900: #1e1e1e;
+  --surface-warm: #fdfcfb;
+
+  --c-rosa: #d5a7b4;
+  --c-ambar: #f8955b;
+  --c-lila: #b4aad5;
+
+  --r-xs: var(--s-2);
+  --r-sm: var(--s-4);
+  --r-md: .375rem;
+  --r-lg: var(--s-8);
+  --r-xl: var(--s-12);
+  --r-pill: 999px;
+  --r-full: 50%;
+
+  --ease-out-quad: cubic-bezier(.5, 1, .89, 1);
+  --ease-out-expo: cubic-bezier(.16, 1, .3, 1);
+  --ease-in-out-quart: cubic-bezier(.76, 0, .24, 1);
+  --ease: var(--ease-out-expo);
+
+  --font-sans: "Geist", "Geist Variable", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: "Geist Mono", "Geist Mono Variable", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+
+  --lh-display: .98;
+  --lh-heading: 1.06;
+  --lh-tight: 1.1;
+  --lh-body: 1.4;
+
+  --track-display: -.042em;
+  --track-heading: -.028em;
+  --track: -.02em;
+  --track-hud: -.04em;
+  --track-print: .08em;
+
+  --fs-hud: .625rem;
+  --fs-meta: .75rem;
+  --fs-caption: .875rem;
+  --fs-body: clamp(1rem, .956rem + .1878vw, 1.125rem);
+  --fs-lead: clamp(1.125rem, 1.081rem + .1878vw, 1.25rem);
+  --fs-h6: clamp(1.125rem, 1.081rem + .1878vw, 1.25rem);
+  --fs-h5: clamp(1.25rem, 1.162rem + .3756vw, 1.5rem);
+  --fs-h4: clamp(1.5rem, 1.3239rem + .7512vw, 2rem);
+  --fs-h3: clamp(1.625rem, 1.3169rem + 1.3146vw, 2.5rem);
+  --fs-h2: clamp(1.875rem, 1.4789rem + 1.6901vw, 3rem);
+  --fs-h1: clamp(2.25rem, 1.6338rem + 2.6291vw, 4rem);
+  --fs-display: clamp(3rem, 1.9437rem + 4.507vw, 6rem);
+
+  --container-max: 90rem;
+  --measure: 42rem;
+  --gutter: clamp(1rem, .6919rem + 1.3146vw, 1.875rem);
+  --header-h: 4rem;
+}
+
+:root,
+[data-theme="light"] {
+  --paper: #d6d6d5;
+  --surface: var(--surface-warm);
+  --card: color-mix(in srgb, var(--mono-900) 5%, var(--paper));
+  --img-outline: #0000001a;
+  --ink: var(--mono-900);
+  --ink-muted: #1e1e1eb3;
+  --fill: #1e1e1e14;
+  --fill-strong: #1e1e1e33;
+  --line: #1e1e1e0f;
+  --divider: #1e1e1e33;
+  --chip: #1e1e1e1f;
+  --scrim: #1e1e1e66;
+  --popover: var(--surface-warm);
+  --shadow-modal: 0 24px 60px -24px #1e1e1e40;
+  --shadow-card: 0 10px 26px -16px #1e1e1e2e;
+  --shadow-control: 0 0 0 1px #1e1e1e0f, 0 2px 6px -2px #1e1e1e24;
+  --btn-fill: #1e1e1eeb;
+  --btn-on: var(--mono-100);
+  --t-rosa: #8f4a60;
+  --t-ambar: #a8470f;
+  --t-lila: #5d4f9e;
+  --grain-tooth: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='linear' slope='0.14'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  --grain-dots: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cg fill='%23808080' fill-opacity='0.055'%3E%3Ccircle cx='4' cy='4' r='1.05'/%3E%3Ccircle cx='0' cy='0' r='1.05'/%3E%3Ccircle cx='8' cy='0' r='1.05'/%3E%3Ccircle cx='0' cy='8' r='1.05'/%3E%3Ccircle cx='8' cy='8' r='1.05'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+[data-theme="dark"] {
+  --paper: var(--mono-900);
+  --surface: #262626;
+  --card: color-mix(in srgb, var(--mono-100) 6%, var(--paper));
+  --img-outline: #ffffff1a;
+  --ink: var(--mono-100);
+  --ink-muted: #f7f7f7a8;
+  --fill: #f7f7f714;
+  --fill-strong: #f7f7f733;
+  --line: #f7f7f70f;
+  --divider: #f7f7f733;
+  --chip: #2f2f2f;
+  --scrim: #0009;
+  --popover: #262626;
+  --shadow-modal: 0 24px 70px -20px #000000b3;
+  --shadow-card: 0 12px 30px -18px #0000008c;
+  --shadow-control: 0 2px 6px -2px #0003;
+  --btn-fill: #f7f7f7eb;
+  --btn-on: var(--mono-900);
+  --t-rosa: #d5a7b4;
+  --t-ambar: #f8955b;
+  --t-lila: #b4aad5;
+  --grain-tooth: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='linear' slope='0.034'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  --grain-dots: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cg fill='%23808080' fill-opacity='0.04'%3E%3Ccircle cx='4' cy='4' r='1.05'/%3E%3Ccircle cx='0' cy='0' r='1.05'/%3E%3Ccircle cx='8' cy='0' r='1.05'/%3E%3Ccircle cx='0' cy='8' r='1.05'/%3E%3Ccircle cx='8' cy='8' r='1.05'/%3E%3C/g%3E%3C/svg%3E");
+}
