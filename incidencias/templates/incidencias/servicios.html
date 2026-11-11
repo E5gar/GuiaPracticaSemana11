@@ -1,0 +1,54 @@
+{% extends 'incidencias/base.html' %}
+
+{% block titulo %}Servicios{% endblock %}
+
+{% block contenido %}
+<section class="encabezado">
+  <div class="contenedor">
+    <p class="etiqueta">CATALOGO::SERVICIOS</p>
+    <h1 class="encabezado__titulo">Lo que la OTI atiende y en cuánto tiempo responde.</h1>
+    <p class="encabezado__lead">Seis servicios cubren la operación tecnológica de la universidad. Cada incidencia se prioriza según su impacto.</p>
+  </div>
+</section>
+
+<section class="contenedor">
+  <div class="servicios">
+    {% for servicio in servicios %}
+    <article class="servicio entra" style="--i: {{ forloop.counter0 }}">
+      <div class="servicio__media">
+        <img src="{{ servicio.imagen }}" alt="Lorem ipsum dolor" loading="lazy" referrerpolicy="no-referrer">
+        <span class="servicio__icono"><i data-lucide="{{ servicio.icono }}"></i></span>
+      </div>
+      <div class="servicio__cuerpo">
+        <h2 class="servicio__titulo">{{ servicio.titulo }}</h2>
+        <p class="servicio__texto">{{ servicio.descripcion }}</p>
+        <ul class="lista-check">
+          {% for punto in servicio.incluye %}
+          <li><i data-lucide="check"></i><span>{{ punto }}</span></li>
+          {% endfor %}
+        </ul>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="seccion">
+  <div class="contenedor dos">
+    <div class="dos__intro">
+      <p class="etiqueta">SLA::RESPUESTA</p>
+      <h2 class="seccion__titulo">Tiempos de respuesta objetivo por prioridad.</h2>
+      <p class="seccion__lead">La prioridad se define al clasificar el caso, según cuántas personas afecta y si existe una alternativa temporal.</p>
+    </div>
+    <div class="tiempos">
+      {% for tiempo in tiempos %}
+      <div class="tiempo entra" style="--i: {{ forloop.counter0 }}">
+        {% include 'incidencias/partials/estado_badge.html' with clave=tiempo.prioridad texto=tiempo.etiqueta %}
+        <p class="tiempo__detalle">{{ tiempo.detalle }}</p>
+        <strong class="tiempo__valor">{{ tiempo.respuesta }}</strong>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}
