@@ -1,0 +1,98 @@
+{% extends 'incidencias/base.html' %}
+
+{% block titulo %}Incidencias{% endblock %}
+
+{% block contenido %}
+<section class="encabezado">
+  <div class="contenedor">
+    <p class="etiqueta">REGISTRO::INCIDENCIAS</p>
+    <h1 class="encabezado__titulo">Incidencias registradas</h1>
+    <p class="encabezado__lead">
+      {{ paginator.count }} incidencia{{ paginator.count|pluralize }}
+      {% if hay_filtros %}con los filtros aplicados{% else %}en el sistema{% endif %}.
+      {% if incidencias %}Último reporte: {{ incidencias.0.fecha_reporte|date:"d M Y, H:i" }}.{% endif %}
+    </p>
+  </div>
+</section>
+
+<section class="contenedor">
+  <div class="chips">
+    <a class="chip" href="{% url 'catalogo' %}"{% if not filtros.estado %} aria-current="true"{% endif %}>Todas</a>
+    {% for clave, etiqueta in opciones.estados %}
+    <a class="chip" href="{% url 'catalogo' %}?estado={{ clave }}"{% if filtros.estado == clave %} aria-current="true"{% endif %}>{{ etiqueta }}</a>
+    {% endfor %}
+  </div>
+
+  <form class="filtros" method="get" action="{% url 'catalogo' %}">
+    <div class="campo">
+      <label class="campo__etiqueta" for="f-q">Buscar</label>
+      <input class="campo__input" id="f-q" type="search" name="q" value="{{ filtros.q }}" placeholder="Código, título, solicitante o dependencia">
+    </div>
+    <div class="campo">
+      <label class="campo__etiqueta" for="f-categoria">Categoría</label>
+      <select class="campo__select" id="f-categoria" name="categoria">
+        <option value="">Todas</option>
+        {% for clave, etiqueta in opciones.categorias %}
+        <option value="{{ clave }}"{% if filtros.categoria == clave %} selected{% endif %}>{{ etiqueta }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="campo">
+      <label class="campo__etiqueta" for="f-prioridad">Prioridad</label>
+      <select class="campo__select" id="f-prioridad" name="prioridad">
+        <option value="">Todas</option>
+        {% for clave, etiqueta in opciones.prioridades %}
+        <option value="{{ clave }}"{% if filtros.prioridad == clave %} selected{% endif %}>{{ etiqueta }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="campo">
+      <label class="campo__etiqueta" for="f-estado">Estado</label>
+      <select class="campo__select" id="f-estado" name="estado">
+        <option value="">Todos</option>
+        {% for clave, etiqueta in opciones.estados %}
+        <option value="{{ clave }}"{% if filtros.estado == clave %} selected{% endif %}>{{ etiqueta }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="filtros__acciones">
+      <button class="btn btn--primario" type="submit"><i data-lucide="search"></i>Filtrar</button>
+      {% if hay_filtros %}
+      <a class="btn btn--fantasma" href="{% url 'catalogo' %}"><i data-lucide="rotate-ccw"></i>Limpiar</a>
+      {% endif %}
+    </div>
+  </form>
+
+  {% if filtros.q %}
+  <p class="resultado-busqueda">Resultados para <strong>{{ filtros.q|title }}</strong></p>
+  {% endif %}
+
+  <div class="rejilla rejilla--lista">
+    {% for incidencia in incidencias %}
+    {% include 'incidencias/partials/tarjeta_incidencia.html' %}
+    {% empty %}
+    <div class="vacio vacio--ancho">
+      <i data-lucide="inbox"></i>
+      <p>No hay incidencias que coincidan con la búsqueda.</p>
+      <a class="btn btn--fantasma" href="{% url 'catalogo' %}">Ver todas las incidencias</a>
+    </div>
+    {% endfor %}
+  </div>
+
+  {% if is_paginated %}
+  <nav class="paginacion" aria-label="Paginación">
+    {% if page_obj.has_previous %}
+    <a class="btn btn--fantasma" href="?{% if querystring %}{{ querystring }}&amp;{% endif %}page={{ page_obj.previous_page_number }}"><i data-lucide="chevron-left"></i>Anterior</a>
+    {% else %}
+    <span class="btn btn--fantasma is-inactivo" aria-disabled="true"><i data-lucide="chevron-left"></i>Anterior</span>
+    {% endif %}
+    <span class="etiqueta">Página {{ page_obj.number }} de {{ paginator.num_pages }}</span>
+    {% if page_obj.has_next %}
+    <a class="btn btn--fantasma" href="?{% if querystring %}{{ querystring }}&amp;{% endif %}page={{ page_obj.next_page_number }}">Siguiente<i data-lucide="chevron-right"></i></a>
+    {% else %}
+    <span class="btn btn--fantasma is-inactivo" aria-disabled="true">Siguiente<i data-lucide="chevron-right"></i></span>
+    {% endif %}
+  </nav>
+  {% endif %}
+</section>
+{% endblock %}
