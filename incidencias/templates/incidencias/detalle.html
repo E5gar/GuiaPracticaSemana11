@@ -1,0 +1,82 @@
+{% extends 'incidencias/base.html' %}
+
+{% block titulo %}{{ incidencia.codigo }}{% endblock %}
+
+{% block contenido %}
+<section class="encabezado">
+  <div class="contenedor">
+    <nav class="migas" aria-label="Ruta de navegación">
+      <a href="{% url 'inicio' %}">Inicio</a>
+      <i data-lucide="chevron-right"></i>
+      <a href="{% url 'catalogo' %}">Incidencias</a>
+      <i data-lucide="chevron-right"></i>
+      <span>{{ incidencia.codigo }}</span>
+    </nav>
+    <div class="detalle__badges">
+      {% include 'incidencias/partials/estado_badge.html' with clave=incidencia.estado texto=incidencia.get_estado_display %}
+      {% include 'incidencias/partials/estado_badge.html' with clave=incidencia.prioridad texto=incidencia.get_prioridad_display %}
+      {% if incidencia.es_urgente %}<span class="etiqueta etiqueta--alerta">Requiere atención inmediata</span>{% endif %}
+    </div>
+    <h1 class="encabezado__titulo">{{ incidencia.titulo }}</h1>
+    <p class="encabezado__lead">Reportada el {{ incidencia.fecha_reporte|date:"j \d\e F \d\e Y, H:i" }} por {{ incidencia.solicitante|title }}.</p>
+  </div>
+</section>
+
+<section class="contenedor detalle">
+  <div class="detalle__principal">
+    {% if incidencia.imagen_url %}
+    <div class="detalle__media">
+      <img src="{{ incidencia.imagen_url }}" alt="Lorem ipsum dolor" referrerpolicy="no-referrer">
+    </div>
+    {% endif %}
+    <div class="texto-largo">
+      <p class="etiqueta">DESCRIPCION</p>
+      {{ incidencia.descripcion|linebreaks }}
+    </div>
+    <div class="texto-largo">
+      <p class="etiqueta">LINEA::TIEMPO</p>
+      <ol class="linea">
+        <li class="linea__hito">
+          <strong>Incidencia reportada</strong>
+          <span>{{ incidencia.fecha_reporte|date:"d M Y, H:i" }}</span>
+        </li>
+        <li class="linea__hito">
+          <strong>Última actualización: {{ incidencia.get_estado_display }}</strong>
+          <span>{{ incidencia.fecha_actualizacion|date:"d M Y, H:i" }}</span>
+        </li>
+      </ol>
+    </div>
+  </div>
+
+  <aside class="detalle__lateral">
+    <p class="etiqueta">FICHA::{{ incidencia.codigo }}</p>
+    <dl class="ficha">
+      <div class="ficha__fila"><dt>Categoría</dt><dd>{{ incidencia.get_categoria_display }}</dd></div>
+      <div class="ficha__fila"><dt>Solicitante</dt><dd>{{ incidencia.solicitante|title }}</dd></div>
+      <div class="ficha__fila"><dt>Dependencia</dt><dd>{{ incidencia.dependencia }}</dd></div>
+      <div class="ficha__fila"><dt>Ubicación</dt><dd>{{ incidencia.ubicacion }}</dd></div>
+      <div class="ficha__fila"><dt>Tiempo abierta</dt><dd>{{ incidencia.fecha_reporte|timesince }}</dd></div>
+    </dl>
+    <a class="btn btn--primario" href="tel:+51931425914"><i data-lucide="phone"></i>Llamar a la OTI</a>
+    <a class="btn btn--fantasma" href="{% url 'catalogo' %}"><i data-lucide="chevron-left"></i>Volver al listado</a>
+  </aside>
+</section>
+
+{% if relacionadas %}
+<section class="seccion">
+  <div class="contenedor">
+    <div class="seccion__cabecera">
+      <div>
+        <p class="etiqueta">MISMA::CATEGORIA</p>
+        <h2 class="seccion__titulo">Incidencias relacionadas</h2>
+      </div>
+    </div>
+    <div class="rejilla">
+      {% for incidencia in relacionadas %}
+      {% include 'incidencias/partials/tarjeta_incidencia.html' %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+{% endblock %}
