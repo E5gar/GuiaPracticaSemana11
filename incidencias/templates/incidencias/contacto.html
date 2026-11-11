@@ -1,0 +1,55 @@
+{% extends 'incidencias/base.html' %}
+
+{% block titulo %}Contacto{% endblock %}
+
+{% block contenido %}
+<section class="encabezado">
+  <div class="contenedor">
+    <p class="etiqueta">CANALES::CONTACTO</p>
+    <h1 class="encabezado__titulo">Reporta una falla por el canal que te resulte más rápido.</h1>
+    <p class="encabezado__lead">Un técnico de la OTI registrará tu caso y te entregará un código para seguirlo en este sistema.</p>
+  </div>
+</section>
+
+<section class="contenedor contacto-grid">
+  <div class="canales">
+    <a class="canal entra" href="tel:+51931425914">
+      <span class="canal__icono canal__icono--ambar"><i data-lucide="phone"></i></span>
+      <span class="canal__texto"><small>Teléfono y WhatsApp</small><strong>+51 931 425 914</strong></span>
+      <i data-lucide="arrow-up-right"></i>
+    </a>
+    <a class="canal entra" href="mailto:contacto@musiccentro.pe" style="--i: 1">
+      <span class="canal__icono canal__icono--lila"><i data-lucide="mail"></i></span>
+      <span class="canal__texto"><small>Correo electrónico</small><strong>contacto@musiccentro.pe</strong></span>
+      <i data-lucide="arrow-up-right"></i>
+    </a>
+    <div class="canal entra" style="--i: 2">
+      <span class="canal__icono canal__icono--rosa"><i data-lucide="map-pin"></i></span>
+      <span class="canal__texto"><small>Dirección</small><strong>Av. Mariscal Castilla N.° 3909 - 4089, El Tambo, Huancayo, Junín</strong></span>
+    </div>
+    <div class="canal entra" style="--i: 3">
+      <span class="canal__icono canal__icono--ambar"><i data-lucide="clock"></i></span>
+      <span class="canal__texto"><small>Horario de atención</small><strong>Lunes a viernes, 8:00 a 17:00</strong></span>
+    </div>
+  </div>
+
+  <div class="preparar">
+    <div class="preparar__media">
+      <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=70" alt="Lorem ipsum dolor" loading="lazy" referrerpolicy="no-referrer">
+    </div>
+    <div class="preparar__cuerpo">
+      <p class="etiqueta">ANTES::DE::LLAMAR</p>
+      <h2 class="preparar__titulo">Ten a la mano estos datos</h2>
+      <ul class="lista-check">
+        <li><i data-lucide="check"></i><span>Tu nombre y la dependencia donde trabajas o estudias.</span></li>
+        <li><i data-lucide="check"></i><span>Pabellón, laboratorio u oficina donde ocurre la falla.</span></li>
+        <li><i data-lucide="check"></i><span>Qué estabas haciendo cuando apareció el problema.</span></li>
+        <li><i data-lucide="check"></i><span>El código de la incidencia, si ya la habías reportado.</span></li>
+      </ul>
+      <a class="btn btn--fantasma" href="{% url 'catalogo' %}"><i data-lucide="search"></i>Buscar si ya fue reportada</a>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block banda %}{% endblock %}
