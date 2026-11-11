@@ -1,0 +1,44 @@
+{% load static %}
+<footer class="pie">
+  <div class="contenedor">
+    <div class="pie__grid">
+      <div class="pie__col pie__col--marca">
+        <div class="pie__logos">
+          <img src="{% static 'incidencias/img/icon-uncp.png' %}" alt="Lorem ipsum dolor" height="44">
+          <img src="{% static 'incidencias/img/icon-fis.png' %}" alt="Lorem ipsum dolor" height="44">
+        </div>
+        <p class="pie__texto">Atencion OTI UNCP es el sistema de registro y seguimiento de incidencias técnicas de la Universidad Nacional del Centro del Perú.</p>
+      </div>
+      <div class="pie__col">
+        <h3 class="etiqueta">Navegación</h3>
+        <ul class="pie__lista">
+          <li><a href="{% url 'inicio' %}">Inicio</a></li>
+          <li><a href="{% url 'catalogo' %}">Incidencias</a></li>
+          <li><a href="{% url 'servicios' %}">Servicios</a></li>
+          <li><a href="{% url 'contacto' %}">Contacto</a></li>
+        </ul>
+      </div>
+      <div class="pie__col">
+        <h3 class="etiqueta">Atajos</h3>
+        <ul class="pie__lista">
+          <li><a href="{% url 'catalogo' %}?estado=abierta">Abiertas</a></li>
+          <li><a href="{% url 'catalogo' %}?estado=en_atencion">En atención</a></li>
+          <li><a href="{% url 'catalogo' %}?prioridad=critica">Críticas</a></li>
+          <li><a href="{% url 'catalogo' %}?estado=resuelta">Resueltas</a></li>
+        </ul>
+      </div>
+      <div class="pie__col">
+        <h3 class="etiqueta">Contacto</h3>
+        <ul class="pie__lista">
+          <li><a href="tel:+51931425914"><i data-lucide="phone"></i>+51 931 425 914</a></li>
+          <li><a href="mailto:contacto@musiccentro.pe"><i data-lucide="mail"></i>contacto@musiccentro.pe</a></li>
+          <li><span><i data-lucide="map-pin"></i>El Tambo, Huancayo, Junín</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="pie__legal">
+      <span class="etiqueta">UNCP - Facultad de Ingeniería de Sistemas - Desarrollo de Aplicaciones Web - IX Semestre - Gago Uribe Edgar Robert</span>
+      <span class="etiqueta">{% now "Y" %} Atencion OTI UNCP</span>
+    </div>
+  </div>
+</footer>
